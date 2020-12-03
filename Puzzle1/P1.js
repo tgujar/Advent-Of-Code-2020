@@ -1,6 +1,7 @@
 // Puzzle available at https://adventofcode.com/2020/day/1
 
 const fs = require('fs');
+let entries;
 try {  
     let data = fs.readFileSync('input.txt', 'utf8');
     entries = data.toString().split("\n").map(entry => Number(entry));    
