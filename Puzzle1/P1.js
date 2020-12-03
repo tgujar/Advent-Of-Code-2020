@@ -23,5 +23,5 @@ function findParts(entries, sum, splits) {
     }
 }
 
-console.log(findParts(entries, 2020, 2));
-console.log(findParts(entries, 2020, 3));
+console.log(findParts(entries, 2020, 2)); // part1
+console.log(findParts(entries, 2020, 3)); // part2

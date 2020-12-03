@@ -28,5 +28,5 @@ const validNew = rows.reduce((acc,{upper, lower, char, pass}) => {
     return acc;
 }, 0);
 
-console.log(validOld);
-console.log(validNew);
+console.log(validOld); // part1
+console.log(validNew); // part2
