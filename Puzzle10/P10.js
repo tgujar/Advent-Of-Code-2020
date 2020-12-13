@@ -28,9 +28,26 @@ function countCombos(adapters) {
     adapters.sort((a,b) => a - b);
     adapters.push(adapters[adapters.length - 1] + 3);
     for (let a of adapters) {
-        mem.set(String(a), (mem.get(String(a-1)) || 0) + 
-                        (mem.get(String(a-2)) || 0) + 
-                        (mem.get(String(a-3)) || 0));
+        /* In the below additions we have an || 0, as there are no combinations to be added
+        if there is no adapter*/
+        /*
+        All cases
+        a-1 |a-2 |a-3
+        1   |0   |0
+        1   |0   |1
+        1   |1   |0
+        1   |1   |1 +
+        -----------
+        0   |1   |0
+        0   |1   |1 +
+        -----------
+        0   |0   |1
+        0   |0   |0
+        This considers all possible cases, there can be no a-4,a-5...
+        */
+        mem.set(String(a), (mem.get(String(a-1)) || 0) + // case a-1 there, a-2, a-3 may or may not be
+                        (mem.get(String(a-2)) || 0) + // case a-1 not there, a-2 there,a-3 may or may not be
+                        (mem.get(String(a-3)) || 0)); // case a-1, a-2 not there, a - 3 there 
     }
     return mem.get(String(adapters[adapters.length - 1]));
 }
