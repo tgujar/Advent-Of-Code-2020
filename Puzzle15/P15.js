@@ -1,3 +1,4 @@
+// Puzzle available at https://adventofcode.com/2020/day/15
 const fs = require('fs');
 let startSeq;
 try {
@@ -11,6 +12,7 @@ try {
     console.log('Error:', e.stack);
 }
 
+// This finds the Van Eck's sequence https://oeis.org/A181391
 function findNth(num, startSeq) {
     const store = new Map(startSeq.map((digit, idx) => {
         return [digit, {latest: idx, prev: idx}]
