@@ -15,19 +15,16 @@ try {
 // This finds the Van Eck's sequence https://oeis.org/A181391
 function findNth(num, startSeq) {
     const store = new Map(startSeq.map((digit, idx) => {
-        return [digit, {latest: idx, prev: idx}]
+        return [digit, idx]
     }));
     let last = startSeq[startSeq.length - 1];
-    for (let i = startSeq.length; i < num; i++) {
-        const positions = store.get(last);
-        last = positions.latest - positions.prev;
-        if (store.has(last)) {
-            store.set(last, {latest: i, prev: store.get(last).latest});
-        } else {
-            store.set(last, {latest: i, prev: i});
-        }
+    // calculate next terms till num - 2, 
+    for (let i = startSeq.length - 1; i < num - 1; i++) {
+        const next = i - store.get(last) || 0; // calculate the next term
+        store.set(last, i); // store the last seen(i) at key {last}
+        last = next;
     }
-    return Array.from(store.keys()).find(key => store.get(key).latest === num - 1);
+    return last;  // last conatins the (num - 1) term, since indexes start at 0, this is ans 
 }
 
 console.log(findNth(2020, startSeq)); // part 1
