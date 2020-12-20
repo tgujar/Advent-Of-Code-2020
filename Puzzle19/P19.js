@@ -1,7 +1,7 @@
 const fs = require('fs');
 let rules, msgs;
 try {
-    // let data = fs.readFileSync('input1.txt', 'utf8'); // part 1
+    //let data = fs.readFileSync('input1.txt', 'utf8'); // part 1
     let data = fs.readFileSync('input2.txt', 'utf8'); // part 2
     [rules, msgs] = data.toString().split("\n\n").map(e => e.split("\n"));
 } catch (e) {
@@ -15,33 +15,21 @@ rules.forEach(row => {
         return rule.trim().replace(/"/g, "").split(" ");
     }));
 })
- 
-function reduceRule(ruleNum) {
-    const rules = ruleMap.get(ruleNum);
-    const r = rules
-        .map(rule => {
-            return rule.reduce((subStr, char) => {
-                if (/[a-zA-Z]/.test(char)) return subStr + char;
-                return subStr + reduceRule(char);
-            }, "");
-        });
-    return "(" + r.join("|") + ")";
-}
 
-function part2(str) {
-    let a = reduceRule("42");
-    let b = reduceRule("31");
-    let aCount = 0;
-    let aReg = new RegExp(a, "g");
-    while(aReg.exec(str)) aCount++;
-
-    for (let i = 1; i < aCount; i++) {
-        if(new RegExp(`^${a}{${i+1},}${b}{${i}}$`).test(str)) return true;
+function recurMatch(str, ...rules) {
+    let chars;
+    if (rules.length === 0) {
+        return str ? false : true;
     }
-    return false;
+    if (chars = rules[0].match(/[a-z]*/)[0]) {
+        return str.startsWith(chars[0]) ?
+        recurMatch(str.slice(chars.length), ...rules.slice(1))
+        : false;
+    } 
+    const rule = ruleMap.get(rules[0]);
+    return rule.some(r => {
+        return recurMatch(str, ...r.concat(rules.slice(1)));
+    }); 
 }
 
-// const regex = new RegExp("^"+reduceRule("0")+"$"); // part 1
-// console.log(msgs.reduce((matches, msg) => regex.test(msg) ? matches + 1 : matches, 0)); // part 1
-console.log(msgs.reduce((matches, msg) => part2(msg) ? matches + 1 : matches, 0)); // part 2
-
+console.log(msgs.reduce((count, msg) => recurMatch(msg, "0") ? count + 1 : count, 0));
