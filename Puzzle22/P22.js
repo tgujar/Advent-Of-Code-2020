@@ -1,3 +1,5 @@
+// Puzzle available at https://adventofcode.com/2020/day/22
+
 const fs = require('fs');
 let deck1, deck2;
 try {

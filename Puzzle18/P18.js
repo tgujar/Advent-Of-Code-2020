@@ -1,3 +1,4 @@
+// Puzzle available at https://adventofcode.com/2020/day/18
 const fs = require('fs');
 let exps;
 try {

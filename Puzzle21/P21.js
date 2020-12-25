@@ -1,3 +1,5 @@
+// Puzzle available at https://adventofcode.com/2020/day/21
+
 const fs = require('fs');
 let list;
 let ingreds = [];

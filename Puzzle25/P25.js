@@ -1,3 +1,5 @@
+// Puzzle available at https://adventofcode.com/2020/day/25
+
 const doorKey = 11239946;
 const cardKey = 10464955;
 const subject = 7;

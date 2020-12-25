@@ -1,3 +1,4 @@
+// Puzzle available at https://adventofcode.com/2020/day/20
 const fs = require('fs');
 const tiles = {};
 try {

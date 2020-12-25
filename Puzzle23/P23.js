@@ -1,3 +1,5 @@
+// Puzzle available at https://adventofcode.com/2020/day/23
+
 let cups = "368195742".split("").map(e => Number(e));
 
 function createCLL(cups) { // uses Maps to create a circular linked list

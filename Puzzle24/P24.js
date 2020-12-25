@@ -1,3 +1,5 @@
+// Puzzle available at https://adventofcode.com/2020/day/24
+
 const fs = require("fs");
 let dirPattern;
 
